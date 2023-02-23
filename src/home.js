@@ -7,6 +7,17 @@ import axios from 'axios';
 import Ava from './Ava';
 
 export default function Home(props){
+  const [Load, setLoad] = useState(null)
+  const [da,setda] = useState({})
+
+  useEffect(() => {
+    console.log("==================== UseEffect ==============================");
+    console.log(da);
+    console.log("==================== UseEffect ==============================");
+  }, [da])
+  
+
+
   const d = "Treatment for a brain tumor depends on whether the tumor is a brain cancer or if it's not cancerous, also called a benign brain tumor. Treatment options also depend on the type, size, grade and location of the brain tumor. Options might include surgery, radiation therapy, radiosurgery, chemotherapy and targeted therapy. When considering your treatment options, your health care team also considers your overall health and your preferences. Treatment might not be needed right away. You might not need treatment right away if your brain tumor is small, isn't cancerous and doesn't cause symptoms. Small, benign brain tumors might not grow or might grow so slowly that they won't ever cause problems. You might have brain MRI scans a few times a year to check for brain tumor growth. If the brain tumor grows more quickly than expected or if you develop symptoms, you might need treatment."
   // const [formimg,setImageForm] = useState(null);
 
@@ -44,6 +55,8 @@ export default function Home(props){
             if(response)
             console.log("======================= Response =============================");
             console.log(JSON.stringify(response.data));
+            console.log("======================= Response 2 =============================");
+            setda(response.data);
         })
         .catch((error) => {
           console.log("========================== Error ===============================");
@@ -71,7 +84,7 @@ export default function Home(props){
 
     return (
       <View style={{justifyContent:'center',alignItems:'center'}}>
-        {image?<BloodData data={image} txt={d} fun={PickImage}/>:<Ava fun={PickImage}/>}
+        {image?<BloodData data={image} txt={da} fun={PickImage}/>:<Ava fun={PickImage}/>}
     </View>
     );
   }
